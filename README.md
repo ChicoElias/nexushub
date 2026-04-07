@@ -1,98 +1,118 @@
-🇪🇸 Spanish version: "README_ES.md" (./README_ES.md)
+# NexusHub
 
-NexusHub
+NexusHub is a fullstack portfolio project built around a Spring Boot backend and an Android client. It simulates a product catalog and inventory management workflow for small sellers who need a lightweight way to publish listings, track stock, and browse products from a mobile app.
 
-Mobile-first product management system built with Android (Kotlin + Jetpack Compose) and a Spring Boot REST API.
+## Why This Project Matters
 
-Overview
+This repository is useful in a portfolio because it connects two skills that are often shown separately:
 
-NexusHub is a fullstack project that demonstrates integration between a native Android application and a backend API.
-It simulates a product management system for small businesses, focusing on clean architecture and real development practices.
+- backend API design with Java and Spring Boot
+- Android app development with Kotlin and Jetpack Compose
 
-Tech Stack
+Instead of presenting isolated exercises, NexusHub shows how a mobile client can consume a custom API with realistic business rules such as stock transitions, visibility control, and ownership validation.
 
-Mobile
+## Repository Structure
 
-- Kotlin
-- Jetpack Compose
-- MVVM
-- Retrofit
+```text
+nexushub/
+|-- nexushub-backend
+`-- nexushub-android
+```
 
-Backend
+## Backend Highlights
 
-- Java
-- Spring Boot
-- Spring Data JPA
-- Maven
+- Java 17 + Spring Boot 3.2
+- layered architecture with controller, service, repository, dto, entity, config, and exception packages
+- Spring Data JPA and Hibernate
+- H2 for local development and optional MySQL configuration
+- Swagger / OpenAPI documentation
+- input validation and centralized error handling
+- seeded demo data for quick local testing
 
-Database
+## Android Highlights
 
-- H2 (development)
-- MySQL (configurable)
+- Kotlin + Jetpack Compose
+- MVVM + StateFlow
+- Retrofit + OkHttp for API integration
+- DataStore for local session persistence
+- Material 3 UI with reusable components
 
-Features
+## Key Features
 
-- User registration and basic login
-- Product CRUD operations
-- Product listing and detail view
-- Data validation and error handling
-- Integration between mobile app and backend API
+- user registration and login
+- product creation, update, and soft deletion
+- automatic product status transitions based on stock
+- full-text search and category filtering
+- paginated product listings
+- product statistics endpoint
+- mobile catalog browsing and detail view
 
-Architecture
+## Product Status Rules
 
-Backend
+- products with stock greater than zero start as `ACTIVE`
+- products with zero stock become `OUT_OF_STOCK`
+- sellers can manually set products to `INACTIVE`
+- products cannot be activated if stock is zero
 
-- Controller
-- Service
-- Repository
-- DTO
-- Entity
-- Exception Handler
+## Running The Backend
 
-Mobile
+Prerequisites:
 
-- UI (Jetpack Compose)
-- ViewModel
-- Repository
-- API Service (Retrofit)
+- Java 17+
+- Maven 3.8+
 
-API Endpoints
+Commands:
 
-Auth
-
-- POST /auth/register
-- POST /auth/login
-
-Products
-
-- GET /products
-- GET /products/{id}
-- POST /products
-- PUT /products/{id}
-- DELETE /products/{id}
-
-How to Run Backend
-
+```bash
+cd nexushub-backend
 mvn spring-boot:run
+```
 
-Swagger:
+Useful URLs:
 
-http://localhost:8080/swagger-ui/index.html
+- Swagger UI: `http://localhost:8080/swagger-ui.html`
+- H2 Console: `http://localhost:8080/h2-console`
+- OpenAPI JSON: `http://localhost:8080/api-docs`
 
-How to Run Mobile App
+Demo accounts:
 
-1. Open in Android Studio
-2. Run emulator or device
-3. Ensure backend is running
+- `alice@nexushub.dev` / `password123`
+- `bob@nexushub.dev` / `password123`
 
-Future Improvements
+## Running The Android App
 
-- JWT authentication
-- Product filtering
-- User-product relation
-- Pagination
+Prerequisites:
 
-Author
+- Android Studio Hedgehog or newer
+- Android emulator or physical device
 
-Elías Delgado Manríquez
-GitHub: https://github.com/ChicoElias
+Steps:
+
+1. Open `nexushub-android` in Android Studio.
+2. Wait for Gradle sync to finish.
+3. Run the app on an emulator or device.
+4. Keep the backend running locally.
+
+The emulator base URL is configured for `http://10.0.2.2:8080`.
+
+## Portfolio Value
+
+NexusHub helps demonstrate:
+
+- backend and mobile integration
+- API contract design
+- real-world CRUD rules beyond basic demos
+- inventory state handling
+- a clean separation between client and server responsibilities
+
+## Future Improvements
+
+- JWT-based authentication
+- image upload support
+- Dockerized backend environment
+- automated tests for the backend module
+- CI for both backend and Android modules
+
+## License
+
+This project is licensed under the MIT License.
